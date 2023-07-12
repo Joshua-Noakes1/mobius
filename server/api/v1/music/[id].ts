@@ -1,4 +1,4 @@
-import { default as getAlbum } from "../../../../assets/music/getAlbum";
+import { default as getAlbum } from "~/assets/music/getAlbum";
 
 export default defineEventHandler(async (event) => {
     // console.log(event)
@@ -53,6 +53,7 @@ export default defineEventHandler(async (event) => {
                     upc: album.attributes.upc,
                     trackCount: album.attributes.trackCount,
                     isPreRelease: album.attributes.isPrerelease,
+                    releaseDate: new Date(album.attributes.releaseDate).getTime(),
                     preferredColor: album.attributes.artwork.bgColor,
                     notes: {
                         long: album.attributes.editorialNotes ? album.attributes.editorialNotes.standard : '',
