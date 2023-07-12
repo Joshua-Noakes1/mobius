@@ -53,6 +53,7 @@ export default defineEventHandler(async (event) => {
                     upc: album.attributes.upc,
                     trackCount: album.attributes.trackCount,
                     isPreRelease: album.attributes.isPrerelease,
+                    preferredColor: album.attributes.artwork.bgColor,
                     notes: {
                         long: album.attributes.editorialNotes ? album.attributes.editorialNotes.standard : '',
                         short: album.attributes.editorialNotes ? album.attributes.editorialNotes.short : '',
