@@ -24,37 +24,56 @@ export default {
             else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                 artworkVideo.src = videoSrc;
             }
+
+            // wait for video to load
+            await new Promise(resolve => {
+                artworkVideo.onloadeddata = resolve;
+            });
             artworkVideo.play();
         }
     },
 
-    mounted() {
+    async mounted() {
+        // edit the border color of css custom-border
+        var customBorder = document.getElementsByClassName('custom-border')[0];
+        customBorder.style.border = `1px solid #${this.albumData.meta.preferredColor}`;
+
+        // load video
         if (this.albumData.artworkVideo !== '') {
-            this.playArtworkVideo();
+            await this.playArtworkVideo();
         }
+
+        // update the artwork image to the highest quality
+        var artworkImage = document.getElementById('artworkImage');
+        artworkImage.src = this.albumData.artwork;
+        var barworkImage = document.getElementById('barArtwork');
+        barworkImage.src = this.albumData.barEditorArtwork;
+
     }
 }
 </script>
 
 <template>
-    <div class="card mb-3" data-bs-theme="dark">
-        <img v-if="albumData.barEditorArtwork !== ''" :src="albumData.barEditorArtwork" class="card-img-top rounded"
-            :alt="albumData.artist" :title="albumData.artist" style="margin-bottom: 0.3rem;">
+    <div class="card custom-border mb-3" data-bs-theme="dark">
+        <img v-if="albumData.barEditorArtwork !== ''" id="barArtwork" :src="albumData.barEditorArtworkLQ"
+            class="card-img-top rounded" :alt="albumData.artist" :title="albumData.artist" style="margin-bottom: 0.3rem;">
         <div class="row g-0">
-            <div class="col-md-4">
-                <small v-if="albumData.artworkVideo !== ''" class="card-text">Album Cover</small>
-                <img :src="albumData.artwork" class="img-fluid rounded-start mx-auto" :alt="albumData.name"
+            <div class="col-md-4 container-fluid">
+                <div style="margin-top: 0.2rem;"></div>
+                <small v-if="albumData.artworkVideo !== ''" class="card-text text-muted">Album Cover</small>
+                <img :src="albumData.artworkLQ" id="artworkImage" class="img-fluid rounded mx-auto" :alt="albumData.name"
                     :title="albumData.name">
-                <small v-if="albumData.artworkVideo !== ''" class="card-text">Album Video</small>
+                <small v-if="albumData.artworkVideo !== ''" class="card-text text-muted">Album Video</small>
                 <video v-if="albumData.artworkVideo !== ''" id="artworkVideo" class="img-fluid rounded-start mx-auto"
-                    autoplay muted loop></video>
+                    :poster="albumData.artworkLQ" autoplay muted loop></video>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <a :href="albumData.meta.itunes.url" target="_blank">
                         <h5 class="card-title"><span v-if="albumData.meta.isPreRelease">[Pre-Release] </span>{{
                             albumData.name }} ({{ formatTimeCard(albumData.meta.releaseDate).year }}) [UPC: {{
-        albumData.meta.upc }}] <i v-if="albumData.meta.isExplicit" class="fa-solid fa-land-mine-on" title="Album Explicit"></i></h5>
+        albumData.meta.upc }}] <i v-if="albumData.meta.isExplicit" class="fa-solid fa-land-mine-on"
+                                title="Album Explicit"></i></h5>
                     </a>
                     <p class="card-text">{{ albumData.artist }}</p>
                     <small id="labelAndCopyright">
@@ -112,4 +131,9 @@ export default {
 a {
     color: #4383bb;
     text-decoration: none;
-}</style>
+}
+
+.custom-border {
+    border: 1px solid #4383bb;
+}
+</style>

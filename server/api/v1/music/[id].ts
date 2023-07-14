@@ -45,9 +45,11 @@ export default defineEventHandler(async (event) => {
                 id: album.id,
                 name: album.attributes.name,
                 artist: album.attributes.artistName,
-                artwork: album.attributes.artwork.url.replace("{w}", album.attributes.artwork.width).replace("{h}", album.attributes.artwork.height).replace("{f}", "png"),
+                artwork: album.attributes.artwork.url.replace("{w}", album.attributes.artwork.width).replace("{h}", album.attributes.artwork.height),
+                artworkLQ: album.attributes.artwork.url.replace("{w}", album.attributes.artwork.width / 10).replace("{h}", album.attributes.artwork.height / 10),
                 artworkVideo: album.attributes.editorialVideo !== undefined ? album.attributes.editorialVideo.motionDetailSquare.video : '',
                 barEditorArtwork: album.attributes.editorialArtwork !== undefined ? album.attributes.editorialArtwork.bannerUber !== undefined ? album.attributes.editorialArtwork.bannerUber.url.replace("{w}", album.attributes.editorialArtwork.bannerUber.width).replace("{h}", album.attributes.editorialArtwork.bannerUber.height).replace("{f}", "png") : album.attributes.editorialArtwork.storeFlowcase !== undefined ? album.attributes.editorialArtwork.storeFlowcase.url.replace("{w}", album.attributes.editorialArtwork.storeFlowcase.width).replace("{h}", album.attributes.editorialArtwork.storeFlowcase.height).replace("{f}", "png") : '' : '', // yes this is actually fucked
+                barEditorArtworkLQ: album.attributes.editorialArtwork !== undefined ? album.attributes.editorialArtwork.bannerUber !== undefined ? album.attributes.editorialArtwork.bannerUber.url.replace("{w}", album.attributes.editorialArtwork.bannerUber.width / 10).replace("{h}", album.attributes.editorialArtwork.bannerUber.height / 10).replace("{f}", "png") : album.attributes.editorialArtwork.storeFlowcase !== undefined ? album.attributes.editorialArtwork.storeFlowcase.url.replace("{w}", album.attributes.editorialArtwork.storeFlowcase.width / 10).replace("{h}", album.attributes.editorialArtwork.storeFlowcase.height / 10).replace("{f}", "png") : '' : '', // yes this is actually fucked
                 genre: album.attributes.genreNames,
                 meta: {
                     copyright: album.attributes.copyright,
@@ -64,7 +66,7 @@ export default defineEventHandler(async (event) => {
                     },
                     price: {
                         amPrice: album.attributes.offers.find((offer: any) => offer.type === "subscription") ? album.attributes.offers.find((offer: any) => offer.type === "subscription").priceFormatted : 0,
-                        buyPrice: album.attributes.offers.find((offer: any) => offer.type === "buy") ? album.attributes.offers.find((offer: any) => offer.type === "buy").priceFormatted : 0,
+                        buyPrice: album.attributes.offers.find((offer: any) => offer.type === "buy" || offer.type === "preorder") ? album.attributes.offers.find((offer: any) => offer.type === "buy" || offer.type === "preorder").priceFormatted : 0,
                     },
                     itunes: {
                         url: album.attributes.url,
@@ -87,7 +89,6 @@ export default defineEventHandler(async (event) => {
                         track: track.attributes.trackNumber,
                         duration: track.attributes.durationInMillis,
                         meta: {
-                            apiURL: track.href,
                             releaseDate: track.attributes.releaseDate !== undefined ? new Date(track.attributes.releaseDate).getTime() : new Date(album.attributes.releaseDate).getTime(), // in 99.9% of cases, the track release date is the same as the album release date
                             isrc: track.attributes.isrc,
                             composer: track.attributes.composerName,
@@ -99,6 +100,7 @@ export default defineEventHandler(async (event) => {
                             },
                             itunes: {
                                 url: track.attributes.url,
+                                anyFeatures: track.attributes.isMasteredForItunes || track.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "lossless").includes(true) || track.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "lossy-stereo").includes(true) || track.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "high-res-lossless").includes(true) || track.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "atmos").includes(true) || track.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "spatial").includes(true),
                                 hasLyrics: track.attributes.hasLyrics,
                                 hasSyncedLyrics: track.attributes.hasTimeSyncedLyrics,
                                 isMasteredForItunes: track.attributes.isMasteredForItunes,
