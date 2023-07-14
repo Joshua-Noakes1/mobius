@@ -67,11 +67,13 @@ export default {
     <div id="albumPage" class="container-fluid">
         <div class="row">
             <div class="col-12 col-lg-7">
-                <AlbumTrackList :albumData="albumData" />
+                <AlbumTrackList :albumData="albumData" class="d-none d-lg-block"/>
+                <AlbumInfoBox :albumData="albumData" class="d-block d-lg-none"/> <!-- Theres probably a better way to do this -->
                 <div class="d-block d-lg-none" style="margin-top: 1rem;"></div>
             </div>
             <div class="col-12 col-lg-5">
-                <AlbumInfoBox :albumData="albumData" />
+                <AlbumInfoBox :albumData="albumData" class="d-none d-lg-block"/>
+                <AlbumTrackList :albumData="albumData" class="d-block d-lg-none"/>
             </div>
         </div>
     </div>
