@@ -1,0 +1,319 @@
+[
+    {
+      "code": "AE",
+      "country": "🇦🇪 - United Arab Emirates"
+    },
+    {
+      "code": "AR",
+      "country": "🇦🇷 - Argentina"
+    },
+    {
+      "code": "AT",
+      "country": "🇦🇹 - Austria"
+    },
+    {
+      "code": "AU",
+      "country": "🇦🇺 - Australia"
+    },
+    {
+      "code": "BE",
+      "country": "🇧🇪 - Belgium"
+    },
+    {
+      "code": "BG",
+      "country": "🇧🇬 - Bulgaria"
+    },
+    {
+      "code": "BH",
+      "country": "🇧🇭 - Bahrain"
+    },
+    {
+      "code": "BO",
+      "country": "🇧🇴 - Bolivia"
+    },
+    {
+      "code": "BR",
+      "country": "🇧🇷 - Brazil"
+    },
+    {
+      "code": "CA",
+      "country": "🇨🇦 - Canada"
+    },
+    {
+      "code": "CH",
+      "country": "🇨🇭 - Switzerland"
+    },
+    {
+      "code": "CL",
+      "country": "🇨🇱 - Chile"
+    },
+    {
+      "code": "CO",
+      "country": "🇨🇴 - Colombia"
+    },
+    {
+      "code": "CR",
+      "country": "🇨🇷 - Costa Rica"
+    },
+    {
+      "code": "CY",
+      "country": "🇨🇾 - Cyprus"
+    },
+    {
+      "code": "CZ",
+      "country": "🇨🇿 - Czech Republic"
+    },
+    {
+      "code": "DE",
+      "country": "🇩🇪 - Germany"
+    },
+    {
+      "code": "DK",
+      "country": "🇩🇰 - Denmark"
+    },
+    {
+      "code": "DO",
+      "country": "🇩🇴 - Dominican Republic"
+    },
+    {
+      "code": "EC",
+      "country": "🇪🇨 - Ecuador"
+    },
+    {
+      "code": "EE",
+      "country": "🇪🇪 - Estonia"
+    },
+    {
+      "code": "EG",
+      "country": "🇪🇬 - Egypt"
+    },
+    {
+      "code": "ES",
+      "country": "🇪🇸 - Spain"
+    },
+    {
+      "code": "FI",
+      "country": "🇫🇮 - Finland"
+    },
+    {
+      "code": "FR",
+      "country": "🇫🇷 - France"
+    },
+    {
+      "code": "GB",
+      "country": "🇬🇧 - United Kingdom"
+    },
+    {
+      "code": "GR",
+      "country": "🇬🇷 - Greece"
+    },
+    {
+      "code": "GT",
+      "country": "🇬🇹 - Guatemala"
+    },
+    {
+      "code": "HK",
+      "country": "🇭🇰 - Hong Kong"
+    },
+    {
+      "code": "HN",
+      "country": "🇭🇳 - Honduras"
+    },
+    {
+      "code": "HR",
+      "country": "🇭🇷 - Croatia"
+    },
+    {
+      "code": "HU",
+      "country": "🇭🇺 - Hungary"
+    },
+    {
+      "code": "ID",
+      "country": "🇮🇩 - Indonesia"
+    },
+    {
+      "code": "IE",
+      "country": "🇮🇪 - Ireland"
+    },
+    {
+      "code": "IL",
+      "country": "🇮🇱 - Israel"
+    },
+    {
+      "code": "IN",
+      "country": "🇮🇳 - India"
+    },
+    {
+      "code": "IS",
+      "country": "🇮🇸 - Iceland"
+    },
+    {
+      "code": "IT",
+      "country": "🇮🇹 - Italy"
+    },
+    {
+      "code": "JO",
+      "country": "🇯🇴 - Jordan"
+    },
+    {
+      "code": "JP",
+      "country": "🇯🇵 - Japan"
+    },
+    {
+      "code": "KW",
+      "country": "🇰🇼 - Kuwait"
+    },
+    {
+      "code": "LB",
+      "country": "🇱🇧 - Lebanon"
+    },
+    {
+      "code": "LI",
+      "country": "🇱🇮 - Liechtenstein"
+    },
+    {
+      "code": "LT",
+      "country": "🇱🇹 - Lithuania"
+    },
+    {
+      "code": "LU",
+      "country": "🇱🇺 - Luxembourg"
+    },
+    {
+      "code": "LV",
+      "country": "🇱🇻 - Latvia"
+    },
+    {
+      "code": "MA",
+      "country": "🇲🇦 - Morocco"
+    },
+    {
+      "code": "MC",
+      "country": "🇲🇨 - Monaco"
+    },
+    {
+      "code": "MT",
+      "country": "🇲🇹 - Malta"
+    },
+    {
+      "code": "MX",
+      "country": "🇲🇽 - Mexico"
+    },
+    {
+      "code": "MY",
+      "country": "🇲🇾 - Malaysia"
+    },
+    {
+      "code": "NI",
+      "country": "🇳🇮 - Nicaragua"
+    },
+    {
+      "code": "NL",
+      "country": "🇳🇱 - Netherlands"
+    },
+    {
+      "code": "NO",
+      "country": "🇳🇴 - Norway"
+    },
+    {
+      "code": "NZ",
+      "country": "🇳🇿 - New Zealand"
+    },
+    {
+      "code": "OM",
+      "country": "🇴🇲 - Oman"
+    },
+    {
+      "code": "PA",
+      "country": "🇵🇦 - Panama"
+    },
+    {
+      "code": "PE",
+      "country": "🇵🇪 - Peru"
+    },
+    {
+      "code": "PH",
+      "country": "🇵🇭 - Philippines"
+    },
+    {
+      "code": "PL",
+      "country": "🇵🇱 - Poland"
+    },
+    {
+      "code": "PT",
+      "country": "🇵🇹 - Portugal"
+    },
+    {
+      "code": "PY",
+      "country": "🇵🇾 - Paraguay"
+    },
+    {
+      "code": "QA",
+      "country": "🇶🇦 - Qatar"
+    },
+    {
+      "code": "RO",
+      "country": "🇷🇴 - Romania"
+    },
+    {
+      "code": "SA",
+      "country": "🇸🇦 - Saudi Arabia"
+    },
+    {
+      "code": "SE",
+      "country": "🇸🇪 - Sweden"
+    },
+    {
+      "code": "SG",
+      "country": "🇸🇬 - Singapore"
+    },
+    {
+      "code": "SI",
+      "country": "🇸🇮 - Slovenia"
+    },
+    {
+      "code": "SK",
+      "country": "🇸🇰 - Slovakia"
+    },
+    {
+      "code": "SV",
+      "country": "🇸🇻 - El Salvador"
+    },
+    {
+      "code": "TH",
+      "country": "🇹🇭 - Thailand"
+    },
+    {
+      "code": "TN",
+      "country": "🇹🇳 - Tunisia"
+    },
+    {
+      "code": "TR",
+      "country": "🇹🇷 - Turkey"
+    },
+    {
+      "code": "TW",
+      "country": "🇹🇼 - Taiwan"
+    },
+    {
+      "code": "UA",
+      "country": "🇺🇦 - Ukraine"
+    },
+    {
+      "code": "UY",
+      "country": "🇺🇾 - Uruguay"
+    },
+    {
+      "code": "VN",
+      "country": "🇻🇳 - Vietnam"
+    },
+    {
+      "code": "XK",
+      "country": "🇽🇰 - Kosovo"
+    },
+    {
+      "code": "ZA",
+      "country": "🇿🇦 - South Africa"
+    }
+  ]
+  

@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-    <NuxtWelcome />
+    <!-- <NuxtWelcome /> -->
 </template>
 
 <style></style>
