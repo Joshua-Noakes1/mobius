@@ -57,6 +57,7 @@ export default defineEventHandler(async (event) => {
                     isPreRelease: album.attributes.isPrerelease,
                     releaseDate: new Date(album.attributes.releaseDate).getTime(),
                     preferredColor: album.attributes.artwork.bgColor,
+                    isExplicit: album.attributes.contentRating !== undefined ? album.attributes.contentRating.toString().toLowerCase() == "explicit" : false,
                     notes: {
                         long: album.attributes.editorialNotes ? album.attributes.editorialNotes.standard.replace(/(<([^>]+)>)/gi, "") : '',
                         short: album.attributes.editorialNotes ? album.attributes.editorialNotes.short.replace(/(<([^>]+)>)/gi, "") : '',
@@ -91,6 +92,7 @@ export default defineEventHandler(async (event) => {
                             isrc: track.attributes.isrc,
                             composer: track.attributes.composerName,
                             diskNumber: track.attributes.discNumber,
+                            isExplicit: track.attributes.contentRating !== undefined ? track.attributes.contentRating.toString().toLowerCase() == "explicit" : false,
                             price: {
                                 amPrice: track.attributes.offers.find((offer: any) => offer.type === "subscription") ? track.attributes.offers.find((offer: any) => offer.type === "subscription").priceFormatted : 0,
                                 buyPrice: track.attributes.offers.find((offer: any) => offer.type === "buy") ? track.attributes.offers.find((offer: any) => offer.type === "buy").priceFormatted : 0,

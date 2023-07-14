@@ -10,7 +10,6 @@ export default async function getAlbum(albumID: string, storeFront: string = "nz
     }
     try {
         // we use the NZ store as it is the most east from UTC (so it is the first to get new releases, as long as they are not Release Time exclusives)
-        // let amSearchRaw = await fetch(`https://amp-api.music.apple.com/v1/catalog/${storeFront}/${catalogType}?ids=${albumID}`, {
         let amSearchRaw = await fetch(`https://amp-api.music.apple.com/v1/catalog/${storeFront}/${catalogType}/${albumID}?art[url]=f&extend=editorialArtwork,editorialVideo,extendedAssetUrls,offers`, {
             method: "GET",
             headers: {

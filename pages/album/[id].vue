@@ -66,15 +66,16 @@ export default {
 <template>
     <div id="albumPage" class="container-fluid">
         <div class="row">
-            <div class="col-7">
-
+            <div class="col-12 col-lg-7">
+                <AlbumTrackList :albumData="albumData" />
+                <div class="d-block d-lg-none" style="margin-top: 1rem;"></div>
             </div>
-            <div class="col-5">
+            <div class="col-12 col-lg-5">
                 <AlbumInfoBox :albumData="albumData" />
             </div>
         </div>
     </div>
-    {{ albumData }}
+    <!-- {{ albumData }} -->
 </template>
 
 <style></style>

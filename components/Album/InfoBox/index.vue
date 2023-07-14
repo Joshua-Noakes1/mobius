@@ -54,7 +54,7 @@ export default {
                     <a :href="albumData.meta.itunes.url" target="_blank">
                         <h5 class="card-title"><span v-if="albumData.meta.isPreRelease">[Pre-Release] </span>{{
                             albumData.name }} ({{ formatTimeCard(albumData.meta.releaseDate).year }}) [UPC: {{
-        albumData.meta.upc }}]</h5>
+        albumData.meta.upc }}] <i v-if="albumData.meta.isExplicit" class="fa-solid fa-land-mine-on" title="Album Explicit"></i></h5>
                     </a>
                     <p class="card-text">{{ albumData.artist }}</p>
                     <small id="labelAndCopyright">
