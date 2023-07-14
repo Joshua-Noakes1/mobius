@@ -114,6 +114,13 @@ export default {
                             <p class="text-muted">{{ albumData.meta.notes.long }}</p>
                         </details>
                     </span>
+                    <span id="purchasePrices">
+                        <details>
+                            <summary><small class="card-text">Album Price</small></summary>
+                            <p class="text-muted">iTunes Library Price: {{ albumData.meta.price.buyPrice }}</p>
+                            <p class="text-muted">Apple Music Price: {{ albumData.meta.price.amPrice }}</p>
+                        </details>
+                    </span>
                     <p class="card-text"><small class="text-body-secondary">Released: {{
                         formatTimeCard(albumData.meta.releaseDate).relativeTime }} ({{
         formatTimeCard(albumData.meta.releaseDate).dateName }} {{
