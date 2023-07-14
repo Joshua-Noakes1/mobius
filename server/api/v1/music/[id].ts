@@ -45,7 +45,9 @@ export default defineEventHandler(async (event) => {
                 id: album.id,
                 name: album.attributes.name,
                 artist: album.attributes.artistName,
-                artwork: album.attributes.artwork.url.replace("{w}", album.attributes.artwork.width).replace("{h}", album.attributes.artwork.height),
+                artwork: album.attributes.artwork.url.replace("{w}", album.attributes.artwork.width).replace("{h}", album.attributes.artwork.height).replace("{f}", "png"),
+                artworkVideo: album.attributes.editorialVideo !== undefined ? album.attributes.editorialVideo.motionDetailSquare.video : '',
+                barEditorArtwork: album.attributes.editorialArtwork !== undefined ? album.attributes.editorialArtwork.bannerUber !== undefined ? album.attributes.editorialArtwork.bannerUber.url.replace("{w}", album.attributes.editorialArtwork.bannerUber.width).replace("{h}", album.attributes.editorialArtwork.bannerUber.height).replace("{f}", "png") : album.attributes.editorialArtwork.storeFlowcase !== undefined ? album.attributes.editorialArtwork.storeFlowcase.url.replace("{w}", album.attributes.editorialArtwork.storeFlowcase.width).replace("{h}", album.attributes.editorialArtwork.storeFlowcase.height).replace("{f}", "png") : '' : '', // yes this is actually fucked
                 genre: album.attributes.genreNames,
                 meta: {
                     copyright: album.attributes.copyright,
@@ -56,20 +58,30 @@ export default defineEventHandler(async (event) => {
                     releaseDate: new Date(album.attributes.releaseDate).getTime(),
                     preferredColor: album.attributes.artwork.bgColor,
                     notes: {
-                        long: album.attributes.editorialNotes ? album.attributes.editorialNotes.standard : '',
-                        short: album.attributes.editorialNotes ? album.attributes.editorialNotes.short : '',
+                        long: album.attributes.editorialNotes ? album.attributes.editorialNotes.standard.replace(/(<([^>]+)>)/gi, "") : '',
+                        short: album.attributes.editorialNotes ? album.attributes.editorialNotes.short.replace(/(<([^>]+)>)/gi, "") : '',
+                    },
+                    price: {
+                        amPrice: album.attributes.offers.find((offer: any) => offer.type === "subscription") ? album.attributes.offers.find((offer: any) => offer.type === "subscription").priceFormatted : 0,
+                        buyPrice: album.attributes.offers.find((offer: any) => offer.type === "buy") ? album.attributes.offers.find((offer: any) => offer.type === "buy").priceFormatted : 0,
                     },
                     itunes: {
                         url: album.attributes.url,
+                        anyFeatures: album.attributes.isMasteredForItunes || album.attributes.isSingle || album.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "lossless").includes(true) || album.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "lossy-stereo").includes(true) || album.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "high-res-lossless").includes(true) || album.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "atmos").includes(true) || album.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "spatial").includes(true),
                         isMasteredForItunes: album.attributes.isMasteredForItunes,
                         isSingle: album.attributes.isSingle,
+                        isLossless: album.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "lossless").includes(true),
+                        isLossyStereo: album.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "lossy-stereo").includes(true),
+                        isHighResLossless: album.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "high-res-lossless").includes(true), // eg 24-bit 96kHz ALAC
+                        isAtmos: album.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "atmos").includes(true), // eg 24-bit 48kHz Dolby Atmos
+                        isSpatial: album.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "spatial").includes(true), // funny airpods
                     }
                 },
                 tracks: album.relationships.tracks.data.map((track: any) => {
                     return {
                         id: track.id,
                         name: track.attributes.name,
-                        artwork: track.attributes.artwork.url.replace("{w}", track.attributes.artwork.width).replace("{h}", track.attributes.artwork.height),
+                        artwork: track.attributes.artwork.url.replace("{w}", track.attributes.artwork.width).replace("{h}", track.attributes.artwork.height).replace("{f}", "png"),
                         preview: track.attributes.previews.length > 0 ? track.attributes.previews[0].url : '',
                         track: track.attributes.trackNumber,
                         duration: track.attributes.durationInMillis,
@@ -78,6 +90,11 @@ export default defineEventHandler(async (event) => {
                             releaseDate: track.attributes.releaseDate !== undefined ? new Date(track.attributes.releaseDate).getTime() : new Date(album.attributes.releaseDate).getTime(), // in 99.9% of cases, the track release date is the same as the album release date
                             isrc: track.attributes.isrc,
                             composer: track.attributes.composerName,
+                            diskNumber: track.attributes.discNumber,
+                            price: {
+                                amPrice: track.attributes.offers.find((offer: any) => offer.type === "subscription") ? track.attributes.offers.find((offer: any) => offer.type === "subscription").priceFormatted : 0,
+                                buyPrice: track.attributes.offers.find((offer: any) => offer.type === "buy") ? track.attributes.offers.find((offer: any) => offer.type === "buy").priceFormatted : 0,
+                            },
                             itunes: {
                                 url: track.attributes.url,
                                 hasLyrics: track.attributes.hasLyrics,
@@ -88,7 +105,7 @@ export default defineEventHandler(async (event) => {
                                 isLossyStereo: track.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "lossy-stereo").includes(true),
                                 isHighResLossless: track.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "high-res-lossless").includes(true), // eg 24-bit 96kHz ALAC
                                 isAtmos: track.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "atmos").includes(true), // eg 24-bit 48kHz Dolby Atmos
-                                isSpacial: track.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "spatial").includes(true), // funny airpods
+                                isSpatial: track.attributes.audioTraits.map((trait: any) => trait.toString().toLowerCase() === "spatial").includes(true), // funny airpods
                             }
                         }
                     }

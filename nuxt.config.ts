@@ -36,6 +36,9 @@ export default defineNuxtConfig({
           integrity: 'sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz',
           crossorigin: 'anonymous'
         },
+        {
+          src: "https://cdn.jsdelivr.net/npm/hls.js@1"
+        }
       ],
     }
   }

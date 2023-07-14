@@ -43,7 +43,6 @@ useHead({
     link: [
         {
             rel: 'icon',
-            type: 'image/jpeg',
             href: `${albumDataSEO.artwork}`
         }
     ]
@@ -65,22 +64,13 @@ export default {
 </script>
 
 <template>
-    <div style="margin-top: 0.5rem;"></div>
-    <div id="album-id" class="container text-center">
-        <img :src="albumData.artwork" class="rounded mx-auto d-block" alt="album artwork" height="300px" width="300px"
-            style="padding: 0.5rem;" />
-        <div class="card shadow" data-bs-theme="dark">
-            <a :href="albumData.meta.itunes.url" target="_blank">
-                <h5 class="card-header">{{ albumData.name }}<i class="fas fa-external-link-alt float-end link"></i></h5>
-            </a>
-            <div class="card-body">
-                <small><span class="float-start">{{ albumData.artist }}</span><span class="float-end">{{
-                    formatTimeCard(albumData.meta.releaseDate) }}</span></small>
-                <hr class="mx-auto" width="75%" />
-                <h6 class="card-text float-start">Track{{ albumData.meta.trackCount.toString() !== "1" ? `s (${albumData.meta.trackCount})` : ''}}:</h6>
-                <div style="margin-top: 0.5rem;"></div>
-                <p>Test</p>
-                <hr class="mx-auto" width="55%" />
+    <div id="albumPage" class="container-fluid">
+        <div class="row">
+            <div class="col-7">
+
+            </div>
+            <div class="col-5">
+                <AlbumInfoBox :albumData="albumData" />
             </div>
         </div>
     </div>
