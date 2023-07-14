@@ -59,8 +59,8 @@ export default defineEventHandler(async (event) => {
                     preferredColor: album.attributes.artwork.bgColor,
                     isExplicit: album.attributes.contentRating !== undefined ? album.attributes.contentRating.toString().toLowerCase() == "explicit" : false,
                     notes: {
-                        long: album.attributes.editorialNotes ? album.attributes.editorialNotes.standard.replace(/(<([^>]+)>)/gi, "") : '',
-                        short: album.attributes.editorialNotes ? album.attributes.editorialNotes.short.replace(/(<([^>]+)>)/gi, "") : '',
+                        long: album.attributes.editorialNotes ? album.attributes.editorialNotes.standard !== undefined ? album.attributes.editorialNotes.standard.replace(/(<([^>]+)>)/gi, "") : "" : '',
+                        short: album.attributes.editorialNotes ? album.attributes.editorialNotes.short !== undefined ? album.attributes.editorialNotes.short.replace(/(<([^>]+)>)/gi, "")  : "": '',
                     },
                     price: {
                         amPrice: album.attributes.offers.find((offer: any) => offer.type === "subscription") ? album.attributes.offers.find((offer: any) => offer.type === "subscription").priceFormatted : 0,

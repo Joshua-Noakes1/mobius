@@ -39,35 +39,35 @@ export default function cardTime(intDate: string = '') {
     // if relative time is positive
     if (relativeTime > 0) {
         if (relativeTime < 60) {
-            time = `${Math.floor(relativeTime)} seconds ago`;
+            time = `${Math.floor(relativeTime)} second${Math.floor(relativeTime).toString() == "1" ? "" : "s"} ago`;
         } else if (relativeTime < 3600) {
-            time = `${Math.floor(relativeTime / 60)} minutes ago`;
+            time = `${Math.floor(relativeTime / 60)} minute${Math.floor(relativeTime / 60).toString() == "1" ? "" : "s"} ago`;
         } else if (relativeTime < 86400) {
-            time = `${Math.floor(relativeTime / 3600)} hours ago`;
+            time = `${Math.floor(relativeTime / 3600)} hour${Math.floor(relativeTime / 3600).toString() == "1" ? "" : "s"} ago`;
         } else if (relativeTime < 604800) {
-            time = `${Math.floor(relativeTime / 86400)} days ago`;
+            time = `${Math.floor(relativeTime / 86400)} day${Math.floor(relativeTime / 86400).toString() == "1" ? "" : "s"} ago`;
         } else if (relativeTime < 2628000) {
-            time = `${Math.floor(relativeTime / 604800)} weeks ago`;
+            time = `${Math.floor(relativeTime / 604800)} week${Math.floor(relativeTime / 604800).toString() == "1" ? "" : "s"} ago`;
         } else if (relativeTime < 31536000) {
-            time = `${Math.floor(relativeTime / 2628000)} months ago`;
+            time = `${Math.floor(relativeTime / 2628000)} month${Math.floor(relativeTime / 2628000).toString() == "1" ? "" : "s"} ago`;
         } else {
-            time = `${Math.floor(relativeTime / 31536000)} years ago`;
+            time = `${Math.floor(relativeTime / 31536000)} year${Math.floor(relativeTime / 31536000).toString() == "1" ? "" : "s"} ago`;
         }
     } else {
         if (relativeTime > -60) {
-            time = `in ${Math.floor(relativeTime).toString().replace("-", "")} seconds`;
+            time = `in ${Math.floor(relativeTime).toString().replace("-", "")} second${Math.floor(relativeTime).toString().replace("-", "") == "1" ? "" : "s"}`;
         } else if (relativeTime > -3600) {
-            time = `in ${Math.floor(relativeTime / 60).toString().replace("-", "")} minutes`;
+            time = `in ${Math.floor(relativeTime / 60).toString().replace("-", "")} minute${Math.floor(relativeTime / 60).toString().replace("-", "") == "1" ? "" : "s"}`;
         } else if (relativeTime > -86400) {
-            time = `in ${Math.floor(relativeTime / 3600).toString().replace("-", "")} hours`;
+            time = `in ${Math.floor(relativeTime / 3600).toString().replace("-", "")} hour${Math.floor(relativeTime / 3600).toString().replace("-", "") == "1" ? "" : "s"}`;
         } else if (relativeTime > -604800) {
-            time = `in ${Math.floor(relativeTime / 86400).toString().replace("-", "")} days`;
+            time = `in ${Math.floor(relativeTime / 86400).toString().replace("-", "")} day${Math.floor(relativeTime / 86400).toString().replace("-", "") == "1" ? "" : "s"}`;
         } else if (relativeTime > -2628000) {
-            time = `in ${Math.floor(relativeTime / 604800).toString().replace("-", "")} weeks`;
+            time = `in ${Math.floor(relativeTime / 604800).toString().replace("-", "")} week${Math.floor(relativeTime / 604800).toString().replace("-", "") == "1" ? "" : "s"}`;
         } else if (relativeTime > -31536000) {
-            time = `in ${Math.floor(relativeTime / 2628000).toString().replace("-", "")} months`;
+            time = `in ${Math.floor(relativeTime / 2628000).toString().replace("-", "")} month${Math.floor(relativeTime / 2628000).toString().replace("-", "") == "1" ? "" : "s"}`;
         } else {
-            time = `in ${Math.floor(relativeTime / 31536000).toString().replace("-", "")} years`;
+            time = `in ${Math.floor(relativeTime / 31536000).toString().replace("-", "")} year${Math.floor(relativeTime / 31536000).toString().replace("-", "") == "1" ? "" : "s"}`;
         }
     }
         
