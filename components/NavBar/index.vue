@@ -10,7 +10,8 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <NuxtLink class="nav-link" to="/album" disabled>Search Box Will be Here</NuxtLink>
+                    <a class="nav-link" href="https://www.isrcfinder.com/reverse-lookup/" target="_blank">ISRC Finder</a>
+                    <NuxtLink class="nav-link" to="/">Search</NuxtLink>
                 </div>
             </div>
         </div>

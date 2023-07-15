@@ -14,22 +14,28 @@ export default {
         },
 
         async playArtworkVideo() {
-            var artworkVideo = document.getElementById('artworkVideo');
-            var videoSrc = this.albumData.artworkVideo;
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(videoSrc);
-                hls.attachMedia(artworkVideo);
-            }
-            else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                artworkVideo.src = videoSrc;
-            }
+            try {
+                var artworkVideo = document.getElementById('artworkVideo');
+                var videoSrc = this.albumData.artworkVideo;
+                if (Hls.isSupported()) {
+                    console.log('hls supported');
+                    var hls = new Hls();
+                    hls.loadSource(videoSrc);
+                    hls.attachMedia(artworkVideo);
+                } else if (artworkVideo.canPlayType('application/vnd.apple.mpegurl')) {
+                    artworkVideo.src = videoSrc;
+                }
 
-            // wait for video to load
-            await new Promise(resolve => {
-                artworkVideo.onloadeddata = resolve;
-            });
-            artworkVideo.play();
+                // wait for video to load
+                await new Promise(resolve => {
+                    artworkVideo.onloadeddata = resolve;
+                });
+
+                // play video
+                artworkVideo.play();
+            } catch (err) {
+                console.log(err);
+            }
         }
     },
 
@@ -46,8 +52,10 @@ export default {
         // update the artwork image to the highest quality
         var artworkImage = document.getElementById('artworkImage');
         artworkImage.src = this.albumData.artwork;
-        var barworkImage = document.getElementById('barArtwork');
-        barworkImage.src = this.albumData.barEditorArtwork;
+        if (this.albumData.barEditorArtwork !== '') {
+            var barworkImage = document.getElementById('barArtwork');
+            barworkImage.src = this.albumData.barEditorArtwork;
+        }
 
     }
 }
@@ -65,7 +73,7 @@ export default {
                     :title="albumData.name">
                 <small v-if="albumData.artworkVideo !== ''" class="card-text text-muted">Album Video</small>
                 <video v-if="albumData.artworkVideo !== ''" id="artworkVideo" class="img-fluid rounded-start mx-auto"
-                    :poster="albumData.artworkLQ" autoplay muted loop></video>
+                    :poster="albumData.artworkLQ" autoplay muted loop playsinline @click="function(){document.getElementById('artworkVideo').play()}" style="border-radius: 0.3rem;" preload="metadata"></video>
             </div>
             <div class="col-md-8">
                 <div class="card-body">

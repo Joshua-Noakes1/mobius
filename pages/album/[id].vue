@@ -15,7 +15,10 @@ let { data: albumData, error: albumError } = await useFetch(`/api/v1/music/${alb
         return data["data"];
     }
 });
-let albumDataSEO = albumData["_value"];
+let albumDataSEO = {...albumData["_value"]};
+if (albumDataSEO.name.toString().toLowerCase().includes("single")) {
+    albumDataSEO.name = albumDataSEO.name.replace(" - Single", "");
+}
 
 useSeoMeta({
     title: `${albumDataSEO.name}`,
