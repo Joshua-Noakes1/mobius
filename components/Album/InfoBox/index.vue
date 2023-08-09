@@ -62,7 +62,7 @@ export default {
 </script>
 
 <template>
-    <div class="card custom-border mb-3" data-bs-theme="dark">
+    <div class="card custom-border mb-3 shadow" data-bs-theme="dark">
         <img v-if="albumData.barEditorArtwork !== ''" id="barArtwork" :src="albumData.barEditorArtworkLQ"
             class="card-img-top rounded" :alt="albumData.artist" :title="albumData.artist" style="margin-bottom: 0.3rem;">
         <div class="row g-0">

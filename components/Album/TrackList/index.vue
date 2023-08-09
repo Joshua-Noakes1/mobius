@@ -1,8 +1,12 @@
 <script>
 import { default as cardTimeFunc } from '~/assets/time/getTimeCard.ts';
+import { default as getDurationMillis } from "~/assets/time/getDurationMillis.ts";
 
 let diskNumber = 0;
 let diskNumberChanged = false;
+
+// array of currently playing audio elements
+let currentlyPlaying = ref([]);
 
 export default {
     props: {
@@ -15,6 +19,9 @@ export default {
         formatTimeCard(release) {
             return cardTimeFunc(release);
         },
+		getDurationMillis(duration) {
+			return getDurationMillis(duration);
+		},
         changeDiskNumber(diskNumberTrack) {
             if (diskNumberTrack !== diskNumber) {
                 diskNumber = diskNumberTrack;
@@ -33,11 +40,33 @@ export default {
             var audio = document.getElementById(`audio-${id}`);
             var playPauseBtn = document.getElementById(`playPause-${id}`);
             if (audio.paused) {
-                audio.play();
+				// loop over and pause all other audio elements
+				currentlyPlaying.value.forEach((audioElement) => {
+					let playingAudioElement = document.getElementById(`audio-${audioElement}`);
+					let playingAudioElementPlayPauseBtn = document.getElementById(`playPause-${audioElement}`);
+					playingAudioElement.pause();
+					playingAudioElement.currentTime = 0;
+					playingAudioElementPlayPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+					playingAudioElementPlayPauseBtn.style.color = '';
+					currentlyPlaying.value = currentlyPlaying.value.filter((audioElement) => {
+						return audioElement !== playingAudioElement.id.split('-')[1];
+					});
+				});
+				currentlyPlaying.value.push(id);
+                
+				// play audio
+				audio.play();
                 playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
                 playPauseBtn.style.color = '#4383bb';
+
+				audio.addEventListener('ended', function() {
+					var playPauseBtn = document.getElementById(`playPause-${id}`);
+					playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+					playPauseBtn.style.color = '';
+				});
             } else {
                 audio.pause();
+				audio.currentTime = 0;
                 playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
                 playPauseBtn.style.color = '';
             }
@@ -71,7 +100,7 @@ export default {
 </script>
 
 <template>
-    <div class="card mb-3" data-bs-theme="dark">
+    <div class="card mb-3 shadow" data-bs-theme="dark">
         <div class="card-body">
             <a :href="albumData.meta.itunes.url" target="_blank">
                 <h5 class="d-block d-lg-none">{{ albumData.name }} ({{ formatTimeCard(albumData.meta.releaseDate).year }})
@@ -79,7 +108,7 @@ export default {
                 <h5 class="card-title">Track List [Tracks: {{ albumData.meta.trackCount }}]</h5>
             </a>
             <div class="container-fluid">
-                <span v-for="track of albumData.tracks" :key="track.id">
+                <div v-for="track of albumData.tracks" :key="track.id" class="track-info">
                     <span v-if="changeDiskNumber(track.meta.diskNumber)" id="diskNumber" class="diskNumber">
                         <small v-if="track.meta.diskNumber.toString() !== '1'" style="color: #715bd6;">Disk Number: {{
                             track.meta.diskNumber }}</small>
@@ -87,9 +116,9 @@ export default {
                     </span>
                     <!-- This is a really big mess like worse then the api -->
                     <h6>
-                        <a :href="track.meta.itunes.url" target="_blank"><div class="d-none d-lg-inline-block" style="margin-right: 0.3rem;">[ISRC: {{ track.meta.isrc }}]</div>{{ track.track }} - {{ track.name }} <i v-if="track.meta.isExplicit" class="fa-solid fa-land-mine-on" title="Track Explicit"></i></a>
+                        <a :href="track.meta.itunes.url" target="_blank"><div class="d-none d-lg-inline-block text-wrap" style="margin-right: 0.3rem;">[ISRC: {{ track.meta.isrc }}]</div>{{ track.track }} - {{ track.name }}<span v-if="track.meta.isExplicit" title="Track Explicit"> [<strong>E</strong>]</span></a>
                         <a v-if="track.preview !== ''" :href="track.meta.itunes.url" style="text-decoration: none; color: #eee;" @click.prevent="function(){ return false}">
-                            <span :id="nameAudioPlayback(track.id).playPause" class="float-end" @click="playPauseTrack(track.id)"><i class="fa-solid fa-play"></i></span>
+                            <span class="float-end" @click="playPauseTrack(track.id)" style="margin-top: 0.3rem;">{{ getDurationMillis(track.duration).duration }} - <span :id="nameAudioPlayback(track.id).playPause"><i class="fa-solid fa-play"></i></span></span>
                         </a>
                     </h6>
                     <audio v-if="track.preview !== ''" :id="nameAudioPlayback(track.id).audio" class="float-end" :src="track.preview" hidden preload="metadata"></audio>
@@ -113,7 +142,7 @@ export default {
                                 style="margin-left: 0.2rem;"></i></small>
                     </div>
                     <div style="margin-top: 0.5rem; @media(996px) { margin-top: 1rem;}"></div>
-                </span>
+                </div>
             </div>
         </div>
     </div>
@@ -123,6 +152,16 @@ export default {
 a {
     color: #4383bb;
     text-decoration: none;
+}
+
+.track-info {
+	margin-top: 0.5rem;
+}
+
+@media (max-width: 996px) {
+	.track-info {
+		margin-top: 1.5rem;
+	}
 }
 
 .diskNumber {
