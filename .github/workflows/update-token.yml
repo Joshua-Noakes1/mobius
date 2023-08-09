@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '18'
       - run: scripts/getDevToken.sh
       - name: Create pull request
         id: cpr
@@ -20,7 +17,7 @@ jobs:
         with:
           commit-message: '[Automated][CI Skip] Update developer token'
           delete-branch: true
-          base: main
+          base: trunk
           title: '[Automated][CI Skip] Update developer token'
       - name: Merge pull request
         if: steps.cpr.outputs.pull-request-operation == 'created'
