@@ -98,7 +98,9 @@ export default {
                 </div>
             </div>
         </form>
-
+        <div class="text-center fixed-bottom" title="Please don't sue me craig, I love your hair">
+            <h6>Not affiliated with Apple Inc.<span class="d-none d-xl-inline-block">, Apple Music, or any of its subsidiaries and partners including but not limited to music and record labels (UMG, Sony, Warner, etc.)</span></h6>
+        </div>
     </div>
 </template>
 

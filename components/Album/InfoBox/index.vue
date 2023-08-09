@@ -44,11 +44,6 @@ export default {
         var customBorder = document.getElementsByClassName('custom-border')[0];
         customBorder.style.border = `1px solid #${this.albumData.meta.preferredColor}`;
 
-        // load video
-        if (this.albumData.artworkVideo !== '') {
-            await this.playArtworkVideo();
-        }
-
         // update the artwork image to the highest quality
         var artworkImage = document.getElementById('artworkImage');
         artworkImage.src = this.albumData.artwork;
@@ -57,6 +52,10 @@ export default {
             barworkImage.src = this.albumData.barEditorArtwork;
         }
 
+        // load video
+        if (this.albumData.artworkVideo !== '') {
+            await this.playArtworkVideo();
+        }
     }
 }
 </script>
@@ -73,7 +72,9 @@ export default {
                     :title="albumData.name">
                 <small v-if="albumData.artworkVideo !== ''" class="card-text text-muted">Album Video</small>
                 <video v-if="albumData.artworkVideo !== ''" id="artworkVideo" class="img-fluid rounded-start mx-auto"
-                    :poster="albumData.artworkLQ" autoplay muted loop playsinline @click="function(){document.getElementById('artworkVideo').play()}" style="border-radius: 0.3rem;" preload="metadata"></video>
+                    :poster="albumData.artworkLQ" autoplay muted loop playsinline
+                    @click="function () { document.getElementById('artworkVideo').play() }" style="border-radius: 0.3rem;"
+                    preload="metadata"></video>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
