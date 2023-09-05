@@ -130,7 +130,7 @@ export default {
                             <p class="text-muted">Apple Music Price: {{ albumData.meta.price.amPrice }}</p>
                         </details>
                     </span>
-                    <p class="card-text"><small class="text-body-secondary">Released: {{
+                    <p class="card-text" :title="new Date(albumData.meta.releaseDate)"><small class="text-body-secondary">Released: {{
                         formatTimeCard(albumData.meta.releaseDate).relativeTime }} ({{
         formatTimeCard(albumData.meta.releaseDate).dateName }} {{
         formatTimeCard(albumData.meta.releaseDate).date }}{{
